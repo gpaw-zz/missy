@@ -18,12 +18,18 @@ int main()
 	mpz_t period;
 	mpz_init(period);
 
+	vector<mpz_t> periodPattern;
+
+	//dokładność
+	int d;	
+
+	scanf("%d", &d);
+
 	while(mpz_inp_str(x, stdin, 10) != 0)
 	{
 		mpz_add(avg, avg, x);
 		mpz_addmul(var, x, x);
-
-		mpz_out_str(stdout, 10, x);
+		periodPattern.push_back(x);
 	}
 
 	return 0;
