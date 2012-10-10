@@ -44,6 +44,7 @@ def get_numbers(n, r):
 		exp = int(random.random()*r)
 		number = int(random.random()*(2 ** (exp)))
 		numbers.append(number)
+	return numbers
 
 
 
