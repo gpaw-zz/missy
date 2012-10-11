@@ -17,5 +17,4 @@ print_tests:
 	./test_print_results.out
 print_tests_debug:
 	g++ -g -lpthread -lgmpxx -lgmp -lgtest_main -lgtest test_print_results.cpp print_results.cpp print_results.h -o test_print_results.out
-=======
 
