@@ -1,10 +1,10 @@
-#include <iostream>
-#include <vector>
-#include <gmpxx.h>
+#include <stdio.h>
+#include <gmp.h>
 
-using namespace std;
 
-char separator = ',';
+/*using namespace std;
+
+char separator = '.';
 
 void print(mpz_class x, int d)
 {
@@ -35,16 +35,18 @@ void print(mpz_class x, int d)
 	cout << number << endl;
 
 }
+*/
 
 int main()
 {
-	mpz_class xi;
-	mpz_class avg;
-	mpz_class var;
-	mpz_class period;
-	mpz_class precision;
-
-	vector<mpz_class> periodPattern;
+	mpz_t x;
+	mpz_init(x);
+	mpz_t avg;
+	mpz_init(avg);
+	mpz_t var;
+	mpz_init(var);
+	mpz_t precision;
+	mpz_init(precision);
 
 	//dokładność
 	int d;	
@@ -53,28 +55,33 @@ int main()
 	int n = 0;
 
 	scanf("%d", &d);
-	mpz_t temp;
-	mpz_init(temp);
-	mpz_ui_pow_ui(temp, 10, d);
-	precision = mpz_class(temp);
+	mpz_ui_pow_ui(precision, 10, d);
 
-	while ((cin >> xi))
+	while ((mpz_inp_str(x, stdin, 10)) != 0)
 	{
-		avg += xi;
-		var += xi*xi;
-		//periodPattern.push_back(xi);
+		mpz_add(avg, x, avg);
+		mpz_addmul(var, x, x);
+//		periodPattern.push_back(xi);
 		++n;
 	}
 	
-	var *= n;
-	var -= avg*avg;
-	var *= precision;
-	var /= n*n;
+	mpz_mul_ui(var, var, n);
+	mpz_t temp;
+	mpz_init(temp);
+	mpz_mul(temp, avg, avg);
+	mpz_sub(var, var, temp);
+	mpz_mul(var, var, precision);
+	mpz_set_ui(temp, 1);
+	mpz_mul_ui(temp, temp, n*n);
+	mpz_div(var, var, temp);
 
-	avg *= precision;
-	avg /= n;
+	mpz_mul(avg, avg, precision);
+	mpz_div_ui(avg, avg, n);
 
-//	print(avg, d);
+	//print(avg, d);
+	
+	//print(var, d);
+
 
 	return 0;
 }
