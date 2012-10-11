@@ -62,15 +62,19 @@ int main()
 	{
 		avg += xi;
 		var += xi*xi;
-		periodPattern.push_back(xi);
+		//periodPattern.push_back(xi);
 		++n;
 	}
 	
+	var *= n;
+	var -= avg*avg;
+	var *= precision;
+	var /= n*n;
 
 	avg *= precision;
 	avg /= n;
 
-	print(avg, d);
+//	print(avg, d);
 
 	return 0;
 }
