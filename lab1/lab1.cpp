@@ -54,6 +54,7 @@ int main()
 
 	scanf("%d", &d);
 	mpz_t temp;
+	mpz_init(temp);
 	mpz_ui_pow_ui(temp, 10, d);
 	precision = mpz_class(temp);
 
