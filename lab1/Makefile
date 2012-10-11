@@ -6,4 +6,4 @@ else
 endif
 
 all:
-	g++ -lgmp lab1.cpp -o $(NAME)
+	g++ -lgmpxx -lgmp lab1.cpp -o $(NAME)
