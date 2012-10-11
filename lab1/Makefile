@@ -7,6 +7,8 @@ endif
 CC := gcc
 LIBS := -lgmp
 SOURCE := lab1.c
+PRINT_TESTS := test_print.c print.c print.h
+TEST_OUT := test_print.out
 
 all:
 	$(CC) $(LIBS) $(SOURCE) -o $(NAME)
@@ -32,8 +34,8 @@ perf_test: all
 	vimdiff results.txt wyniki_simple_test.txt
 
 print_tests:
-	$(CC) -lpthread $(LIBS) -lgtest_main -lgtest test_print_results.cpp print_results.cpp print_results.h -o test_print_results.out
-	./test_print_results.out
+	$(CC) -lpthread $(LIBS) -lgtest_main -lgtest $(PRINT_TESTS) -o $(TEST_OUT)
+	./$(TEST_OUT)
 print_tests_debug:
 	$(CC) -g -lpthread $(LIBS) -lgtest_main -lgtest test_print_results.cpp print_results.cpp print_results.h -o test_print_results.out
 
