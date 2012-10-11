@@ -6,9 +6,10 @@ endif
 
 CC := gcc
 LIBS := -lgmp
+SOURCE := lab1.c
 
 all:
-	$(CC) $(LIBS) lab1.cpp -o $(NAME)
+	$(CC) $(LIBS) $(SOURCE) -o $(NAME)
 
 simple_test: all
 	python test_gen.py simple_test.txt 3 20 10
