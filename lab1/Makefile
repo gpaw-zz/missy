@@ -4,8 +4,8 @@ else
 	NAME := lab1.out
 endif
 
-CC := g++
-LIBS := -lgmpxx -lgmp
+CC := gcc
+LIBS := -lgmp
 
 all:
 	$(CC) $(LIBS) lab1.cpp -o $(NAME)
