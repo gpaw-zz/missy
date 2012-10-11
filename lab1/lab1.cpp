@@ -1,36 +1,43 @@
 #include <iostream>
 #include <vector>
-#include <gmp.h>
+#include <gmpxx.h>
 
 using namespace std;
 
 int main()
 {
-	mpz_t x;
-	mpz_init(x);
+	mpz_class xi;
+	mpz_class avg;
+	mpz_class var;
+	mpz_class period;
+	mpz_class precision;
 
-	mpz_t avg;
-	mpz_init(avg);
-
-	mpz_t var;
-	mpz_init(var);
-
-	mpz_t period;
-	mpz_init(period);
-
-	vector<mpz_t> periodPattern;
+	vector<mpz_class> periodPattern;
 
 	//dokładność
 	int d;	
 
-	scanf("%d", &d);
+	//liczba elementów na wejściu
+	int n = 0;
 
-	while(mpz_inp_str(x, stdin, 10) != 0)
+	scanf("%d", &d);
+	mpz_t temp;
+	mpz_ui_pow_ui(temp, 10, d);
+	precision = mpz_class(temp);
+
+
+	while ((cin >> xi))
 	{
-		mpz_add(avg, avg, x);
-		mpz_addmul(var, x, x);
-		periodPattern.push_back(x);
+		avg += xi;
+		var += xi*xi;
+		periodPattern.push_back(xi);
+		++n;
 	}
+	
+
+	avg /= n;
+	cout << avg << endl;
+
 
 	return 0;
 }
