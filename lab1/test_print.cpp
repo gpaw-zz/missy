@@ -6,7 +6,7 @@ class PrintTests : public testing::Test
 
 };
 
-void assertPrintEQ(int p, int q, int d, const char* expected)
+void assertPrintEQ(int d, int p, int q, const char* expected)
 {
 	mpz_t prec;
 	mpz_init(prec);
@@ -16,17 +16,35 @@ void assertPrintEQ(int p, int q, int d, const char* expected)
 	mpz_t x;
 	mpz_init(x);
 	mpz_set_ui(x, p);
-	mpz_div_ui(x, x, q);
 	mpz_mul(x, x, prec);
+	mpz_div_ui(x, x, q);
 
 	char* s = NULL;
+	FILE* f = NULL;
 
-	print(x, d, s);
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "Expected: " << expected << "; Actual: ";
+	print(x, d, f);
+	std::cout << std::endl;
+	std::cout << std::endl;
 
-	ASSERT_EQ(expected, s);
+
+	ASSERT_FALSE(true);
 }
 
 TEST(PrintTests, 23_przez_1_precyzja_0)
 {
-	assertPrintEQ(23, 1, 0, "23");
+	assertPrintEQ(0, 23, 1, "23");
 }
+
+TEST(PrintTests, 23_przez_2_precyzja_1)
+{
+	assertPrintEQ(1, 23, 2, "11.5");
+}
+
+TEST(PrintTests, 2_przez_3_precyzja_4)
+{
+	assertPrintEQ(4, 2, 3, "0.6666");
+}
+
