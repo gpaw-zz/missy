@@ -98,3 +98,23 @@ TEST(PrintTests, 2_przez_300_precyzja_2)
 	assertPrintEQ(2, 2, 300, "0");
 }
 
+TEST(PrintTests, 2000_przez_300_precyzja_0)
+{
+	assertPrintEQ(0, 2000, 300, "6");
+}
+
+TEST(PrintTests, 2000_przez_300_precyzja_1)
+{
+	assertPrintEQ(1, 2000, 300, "6.6");
+}
+
+TEST(PrintTests, 2000_przez_2_precyzja_1)
+{
+	assertPrintEQ(1, 2000, 2, "1000");
+}
+
+TEST(PrintTests, 5000_przez_4_precyzja_100)
+{
+	assertPrintEQ(100, 5000, 4, "1250");
+}
+

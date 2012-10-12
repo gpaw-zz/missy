@@ -12,8 +12,10 @@ char* print(mpz_t x, int d, FILE* f)
 	char* ptr = &(numberStr[n-1]);
 
 	int zerosCount = 0;
+	int removeZerosCount = d;
 
-	while ((*ptr == '0') && (ptr != numberStr))
+
+	while ((*ptr == '0') && (ptr != numberStr), removeZerosCount--)
 	{
 		--ptr;
 		++zerosCount;
