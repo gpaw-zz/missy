@@ -40,11 +40,61 @@ TEST(PrintTests, 23_przez_1_precyzja_0)
 
 TEST(PrintTests, 23_przez_2_precyzja_1)
 {
-	assertPrintEQ(1, 23, 2, "11.5");
+	assertPrintEQ(1, 23, 2, "11,5");
 }
 
-TEST(PrintTests, 2_przez_3_precyzja_4)
+TEST(PrintTests, 23_przez_2_precyzja_0)
 {
-	assertPrintEQ(4, 2, 3, "0.6666");
+	assertPrintEQ(0, 23, 2, "11");
+}
+
+TEST(PrintTests, 2_przez_3_precyzja_2)
+{
+	assertPrintEQ(2, 2, 3, "0,66");
+}
+
+TEST(PrintTests, 23_przez_2_precyzja_4)
+{
+	assertPrintEQ(4, 23, 2, "11,5");
+}
+
+TEST(PrintTests, 22_przez_2_precyzja_4)
+{
+	assertPrintEQ(4, 22, 2, "11");
+}
+
+TEST(PrintTests, 0_przez_2_precyzja_4)
+{
+	assertPrintEQ(4, 0, 2, "0");
+}
+
+TEST(PrintTests, 1_przez_200_precyzja_3)
+{
+	assertPrintEQ(3, 1, 200, "0,005");
+}
+
+TEST(PrintTests, 1_przez_2000_precyzja_3)
+{
+	assertPrintEQ(3, 1, 2000, "0");
+}
+
+TEST(PrintTests, 8_przez_3_precyzja_3)
+{
+	assertPrintEQ(3, 8, 3, "2,666");
+}
+
+TEST(PrintTests, 20_przez_7_precyzja_5)
+{
+	assertPrintEQ(5, 20, 7, "2,85714");
+}
+
+TEST(PrintTests, 2_przez_300_precyzja_5)
+{
+	assertPrintEQ(5, 2, 300, "0,00666");
+}
+
+TEST(PrintTests, 2_przez_300_precyzja_2)
+{
+	assertPrintEQ(2, 2, 300, "0");
 }
 
