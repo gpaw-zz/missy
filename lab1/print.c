@@ -30,7 +30,7 @@ char* print(mpz_t x, int d, FILE* f)
 	}
 	else if (d >= n)
 	{
-		char* formatStr = (char*)malloc((2+d-n+zerosCount+3)*sizeof(char));
+		char* formatStr = (char*)malloc((2+d-n+zerosCount+3+1)*sizeof(char));
 		strcpy(formatStr, "0.");
 		char* a = NULL;
 
