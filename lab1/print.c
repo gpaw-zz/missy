@@ -12,34 +12,35 @@ char* print(mpz_t x, int d, FILE* f)
 	char* ptr = &(numberStr[n-1]);
 
 	int zerosCount = 0;
-	int removeZerosCount = d;
+	int maxRemovedZeros = d;
 
 
-	while ((*ptr == '0') && (ptr != numberStr), removeZerosCount--)
+	//usunięcie niepotrzebnych zer z tyłu
+	//po tej operacji zostaje n-zerosCount liczb
+	while ((*ptr == '0') && (ptr != numberStr) && (maxRemovedZeros--))
 	{
 		--ptr;
 		++zerosCount;
 	}
-	++ptr;
-	*ptr = 0;
+	*(ptr+1) = 0;
 
 
+	//jeżeli po przecinku były same zera
 	if ((d == zerosCount) || (*numberStr == '0' && (strlen(numberStr) == 1)))
 	{
 		printf("%s", numberStr);
 	}
+	//jeżeli liczba nie posiada części całkowitej
 	else if (d >= n)
 	{
 		char* formatStr = (char*)malloc((2+d-n+zerosCount+3+1)*sizeof(char));
 		strcpy(formatStr, "0.");
-		char* a = NULL;
 
 		memset(formatStr+2, '0', d-n+zerosCount);
 		*(formatStr+2+d-n+zerosCount) = 0;
 		strcat(formatStr, "%s\n");
 
 		printf(formatStr, numberStr);
-
 	}
 	else
 	{
