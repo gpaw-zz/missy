@@ -29,7 +29,7 @@ hard_test: all
 	vimdiff results.txt wyniki_hard_test.txt
 
 perf_test: all
-	python test_gen.py perf_test.txt 1000 16800000 140
+	python test_gen.py perf_test.txt 32000 16800000 140
 	time ./$(NAME) < perf_test.txt > results.txt
 	vimdiff results.txt wyniki_perf_test.txt
 

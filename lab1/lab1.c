@@ -77,16 +77,17 @@ int main()
 	//dokładność
 	int d;	
 
-	//liczba elementów na wejściu
 
 	scanf("%d", &d);
 	mpz_ui_pow_ui(precision, 10, d);
 
+	//wczytanie pierwszej liczby
 	mpz_inp_str(x, stdin, 10);
 	mpz_add(avg, x, avg);
 	mpz_addmul(var, x, x);
 	mpz_set(numbersRead[0], x);
 
+	//liczba elementów na wejściu
 	int n = 1;
 	int periodLength = 1;
 	int periodIndex = 0;
