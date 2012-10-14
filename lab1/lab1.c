@@ -76,8 +76,6 @@ int main()
 
 	//dokładność
 	int d;	
-
-
 	scanf("%d", &d);
 	mpz_ui_pow_ui(precision, 10, d);
 
