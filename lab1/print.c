@@ -9,24 +9,27 @@ char* print(mpz_t x, int d, FILE* f)
 	numberStr = mpz_get_str(numberStr, 10, x);
 	int n = strlen(numberStr);
 
-	char* ptr = &(numberStr[n-1]);
+	char* zerosPtr = &(numberStr[n-1]);
 
 	int zerosCount = 0;
 	int maxRemovedZeros = d;
 
 
 	//usunięcie niepotrzebnych zer z tyłu
+	//usuwamy maksymalnie d zer
+	//nie usuwamy pierwszej cyfry
 	//po tej operacji zostaje n-zerosCount liczb
-	while ((*ptr == '0') && (ptr != numberStr) && (maxRemovedZeros--))
+	while ((*zerosPtr == '0') && (zerosPtr != numberStr) && (maxRemovedZeros--))
 	{
-		--ptr;
+		--zerosPtr;
 		++zerosCount;
 	}
-	*(ptr+1) = 0;
+	//w tym miejscu kończymy napis
+	*(zerosPtr+1) = 0;
 
 
-	//jeżeli po przecinku były same zera
-	if ((d == zerosCount) || (*numberStr == '0' && (strlen(numberStr) == 1)))
+	//jeżeli liczba nie posiada części ułamkowej
+	if ((d == zerosCount) || (numberStr[0] == '0' && (strlen(numberStr) == 1)))
 	{
 		printf("%s", numberStr);
 	}
@@ -42,14 +45,18 @@ char* print(mpz_t x, int d, FILE* f)
 
 		printf(formatStr, numberStr);
 	}
+	//jeżeli liczba posiada część całkowitą i ułamkową
 	else
 	{
+		//wydzielenie części całkowitej
 		char temp = numberStr[n-d];
 		numberStr[n-d] = 0;
+		//wypisanie części całkowitej
 		printf("%s.", numberStr);
+
+		//wypisanie części ułamkowej
 		numberStr[n-d] = temp;
 		printf("%s\n", numberStr+n-d);
-
 	}
 
 	
