@@ -19,7 +19,7 @@ char* print(mpz_t x, int d, FILE* f)
 	//usuwamy maksymalnie d zer
 	//nie usuwamy pierwszej cyfry
 	//po tej operacji zostaje n-zerosCount liczb
-	while ((*zerosPtr == '0') && (zerosPtr != numberStr) && (maxRemovedZeros--))
+	while ((*zerosPtr == '0') && (zerosPtr != numberStr) && (zerosCount < d))
 	{
 		--zerosPtr;
 		++zerosCount;

@@ -12,14 +12,12 @@ void print(mpz_t x, int d)
 	char* zerosPtr = &(number[n-1]);
 
 	int zerosCount = 0;
-	int maxRemovedZeros = d;
-
 
 	//usunięcie niepotrzebnych zer z tyłu
 	//usuwamy maksymalnie d zer
 	//nie usuwamy pierwszej cyfry
 	//po tej operacji zostaje n-zerosCount liczb
-	while ((*zerosPtr == '0') && (zerosPtr != number) && (maxRemovedZeros--))
+	while ((*zerosPtr == '0') && (zerosPtr != number) && (zerosCount < d))
 	{
 		--zerosPtr;
 		++zerosCount;
@@ -104,7 +102,6 @@ int main()
 		}
 		else
 			++periodIndex;
-
 	}
 	
 	mpz_t avgSqr;
