@@ -20,18 +20,33 @@ simple_test: all
 
 medium_test: all
 	python test_gen.py medium_test.txt 7 1000 20
-	./$(NAME) < simple_test.txt > results.txt
-	vimdiff results.txt wyniki_simple_test.txt
+	./$(NAME) < medium_test.txt > results.txt
+	vimdiff results.txt wyniki_medium_test.txt
 
 hard_test: all
-	python test_gen.py hard_test.txt  10000 64
-	./$(NAME) < simple_test.txt > results.txt
-	vimdiff results.txt wyniki_simple_test.txt
+	python test_gen.py hard_test.txt 100 10000 64
+	./$(NAME) < hard_test.txt > results.txt
+	vimdiff results.txt wyniki_hard_test.txt
 
 perf_test: all
-	python test_gen.py simple_test.txt 1000 17000000 140
-	time ./$(NAME) < simple_test.txt > results.txt
-	vimdiff results.txt wyniki_simple_test.txt
+	python test_gen.py perf_test.txt 1000 16800000 140
+	time ./$(NAME) < perf_test.txt > results.txt
+	vimdiff results.txt wyniki_perf_test.txt
+
+period_simple_test: all
+	python test_gen.py period_simple_test.txt 3 20 10 1,2,3
+	./$(NAME) < period_simple_test.txt > results.txt
+	vimdiff results.txt wyniki_period_simple_test.txt
+
+period_medium_test: all
+	python test_gen.py period_medium_test.txt 7 1000 20 1,2,3,1,2,4
+	./$(NAME) < period_medium_test.txt > results.txt
+	vimdiff results.txt wyniki_period_medium_test.txt
+
+period_hard_test: all
+	python test_gen.py period_hard_test.txt 100 10000 64 1
+	./$(NAME) < period_hard_test.txt > results.txt
+	vimdiff results.txt wyniki_period_hard_test.txt
 
 print_tests:
 	g++ -lpthread $(LIBS) -lgtest_main -lgtest $(PRINT_TESTS) -o $(TEST_OUT)
