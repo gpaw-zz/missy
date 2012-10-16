@@ -70,7 +70,7 @@ if __name__ == "__main__":
 	file = open(testname, 'w')
 	results = open('wyniki_' + testname, 'w')
 
-	file.write(d + '\n')
+
 
 	for number in numbers:
 		file.write("%s\n" % (number))
