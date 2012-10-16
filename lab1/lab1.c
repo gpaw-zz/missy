@@ -13,6 +13,7 @@ void print(mpz_t x, int d)
 
 	int zerosCount = 0;
 
+
 	//usunięcie niepotrzebnych zer z tyłu
 	//usuwamy maksymalnie d zer
 	//nie usuwamy pierwszej cyfry
@@ -61,8 +62,13 @@ void print(mpz_t x, int d)
 
 mpz_t numbersRead[17000000];
 
-int main()
+int main(int argc, char* argv[])
 {
+
+	int d = 0;
+	if (argc == 2)
+		d = atoi(argv[1]);
+
 	mpz_t x;
 	mpz_init(x);
 	mpz_t avg;
@@ -72,37 +78,35 @@ int main()
 	mpz_t precision;
 	mpz_init(precision);
 
-	//dokładność
-	int d;	
-	scanf("%d", &d);
 	mpz_ui_pow_ui(precision, 10, d);
 
-	//wczytanie pierwszej liczby
-	mpz_inp_str(x, stdin, 10);
-	mpz_add(avg, x, avg);
-	mpz_addmul(var, x, x);
-	mpz_set(numbersRead[0], x);
 
 	//liczba elementów na wejściu
-	int n = 1;
-	int periodLength = 1;
-	int periodIndex = 0;
+	int n = 0;
 
-	while (mpz_inp_str(x, stdin, 10) != 0)
+	while (mpz_inp_str(numbersRead[n], stdin, 10) != 0)
 	{
-		mpz_add(avg, x, avg);
-		mpz_addmul(var, x, x);
-		mpz_set(numbersRead[n], x);
+		mpz_add(avg, numbersRead[n], avg);
+		mpz_addmul(var, numbersRead[n], numbersRead[n]);
 		++n;
-
-		if (mpz_cmp(numbersRead[periodIndex % periodLength], x))
-		{
-			periodLength += periodIndex + 1;
-			periodIndex = 0;
-		}
-		else
-			++periodIndex;
 	}
+
+	int periodLength = 1;
+
+	int i, j;
+
+	for (i = 0; i < periodLength; i++)
+	{
+		for (j = periodLength; j < n; j++)
+		{
+			if (mpz_cmp(numbersRead[j % periodLength], numbersRead[j]))
+			{
+				++periodLength;
+				break;
+			}
+		}
+	}
+
 	
 	mpz_t avgSqr;
 	mpz_init(avgSqr);
@@ -114,8 +118,8 @@ int main()
 
 	mpz_t nSqr;
 	mpz_init(nSqr);
-	mpz_set_ui(nSqr, 1);
-	mpz_mul_ui(nSqr, nSqr, n*n);
+	mpz_set_ui(nSqr, n);
+	mpz_mul_ui(nSqr, nSqr, n);
 
 	mpz_div(var, var, nSqr);
 
