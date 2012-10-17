@@ -3,10 +3,10 @@
 #include <string.h>
 #include <gmp.h>
 
-void print(mpz_t x, int d)
+void print(mpz_t* x, int d)
 {
 	char* number = NULL;
-	number = mpz_get_str(number, 10, x);
+	number = mpz_get_str(number, 10, *x);
 	int n = strlen(number);
 
 	char* zerosPtr = &(number[n-1]);
@@ -95,9 +95,9 @@ int main(int argc, char* argv[])
 
 	int i, j;
 
-	for (i = 0; i < periodLength; i++)
+	for (i = 0; i < periodLength; ++i)
 	{
-		for (j = periodLength; j < n; j++)
+		for (j = periodLength; j < n; ++j)
 		{
 			if (mpz_cmp(numbersRead[j % periodLength], numbersRead[j]))
 			{
@@ -107,7 +107,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	
 	mpz_t avgSqr;
 	mpz_init(avgSqr);
 	mpz_mul(avgSqr, avg, avg);
@@ -126,8 +125,8 @@ int main(int argc, char* argv[])
 	mpz_mul(avg, avg, precision);
 	mpz_div_ui(avg, avg, n);
 
-	print(avg, d);
-	print(var, d);
+	print(&avg, d);
+	print(&var, d);
 	printf("%d\n", periodLength);
 
 	return 0;
